@@ -6,7 +6,7 @@ execute_process(COMMAND sh -c "git describe --always --dirty --tags || echo ${SO
 		OUTPUT_STRIP_TRAILING_WHITESPACE)
 
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(ZLIB REQUIRED zlib)
 pkg_check_modules(JANSSON REQUIRED jansson)
+pkg_check_modules(ZLIB REQUIRED zlib)
 
 add_subdirectory(src)
