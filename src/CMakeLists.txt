@@ -1,7 +1,9 @@
 add_definitions(-DSOURCE_VERSION="${SOURCE_VERSION}")
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${ALFREDJSON_BINARY_DIR}
-  ${CMAKE_CURRENT_BINARY_DIR} ${ZLIB_INCLUDE_DIRS} ${JANSSON_INCLUDE_DIRS})
+include_directories(
+    ${JANSSON_INCLUDE_DIRS}
+    ${ZLIB_INCLUDE_DIRS}
+)
 
 add_executable(alfred-json main.c output_string.c output_json.c output_binary.c zcat.c)
 
