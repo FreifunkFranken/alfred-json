@@ -113,6 +113,9 @@ int request_data(int sock, int request_type, bool gzip,
 		ret = read(sock, buf + sizeof(*push),
 			   sizeof(*data));
 
+		if (ret < (int)sizeof(*data))
+			break;
+
 		data = push->data;
 		data_len = ntohs(data->header.length);
 
