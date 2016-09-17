@@ -176,7 +176,7 @@ recv_err:
 int main(int argc, char *argv[])
 {
 	int request = -1;
-	char *socket_path = "/var/run/alfred.sock";
+	const char *socket_path = "/var/run/alfred.sock";
 	struct output_formatter output_formatter = output_formatter_json;
 
 	int opt, opt_ind, i;

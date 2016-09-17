@@ -16,6 +16,6 @@ target_link_libraries(alfred-json
     ${ZLIB_LIBRARIES}
 )
 
-set_target_properties(alfred-json PROPERTIES COMPILE_FLAGS "-std=gnu99 -Wall -pedantic -Wextra -Wshadow -O3")
+set_target_properties(alfred-json PROPERTIES COMPILE_FLAGS "-std=gnu99 -Wall -Wwrite-strings -pedantic -Wextra -Wshadow -O3")
 
 install(TARGETS alfred-json RUNTIME DESTINATION bin)
