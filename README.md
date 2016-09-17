@@ -40,15 +40,6 @@ First, an alfred daemon must be running. Data can be retrieved like this:
       }
     }
 
-Transparent GZIP decompression
-------------------------------
-
-alfred-json will automatically and transparently decompress GZIP compressed
-data when the -z option is given:
-
-     $ echo Hello World | gzip | alfred -s 150
-     $ alfred-json -z -r 150 -f string
-
 License
 -------
 

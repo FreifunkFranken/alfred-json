@@ -35,10 +35,9 @@
 static void alfred_usage(void)
 {
 	printf("alfred-json %s\n\n", SOURCE_VERSION);
-	printf("Usage: alfred-json -r <data type> [-z] [-s <socket>]\n\n");
+	printf("Usage: alfred-json -r <data type> [-s <socket>]\n\n");
 	printf("  -r, --request [data type]   retrieve data from the network\n");
 	printf("  -s, --socket <path>         path to alfred unix socket\n");
-	printf("  -z, --gzip                  enable transparent decompression (GZip)\n");
 	printf("  -h, --help                  this help\n");
 	printf("\n");
 }
@@ -174,7 +173,6 @@ recv_err:
 int main(int argc, char *argv[])
 {
 	int request = -1;
-	bool gzip = false;
 	char *socket_path = "/var/run/alfred.sock";
   struct output_formatter output_formatter = output_formatter_json;
 
@@ -182,7 +180,6 @@ int main(int argc, char *argv[])
 	struct option long_options[] = {
 		{"request",	required_argument,	NULL,	'r'},
 		{"socket",	required_argument,	NULL,	's'},
-		{"gzip",	no_argument,	NULL,	'z'},
 		{"help",	no_argument,	NULL,	'h'},
 		{NULL,	0,	NULL,	0},
 	};
@@ -201,9 +198,6 @@ int main(int argc, char *argv[])
 		case 's':
 			socket_path = optarg;
 			break;
-		case 'z':
-			gzip = true;
-			break;
 		case 'h':
 		default:
 			alfred_usage();
@@ -220,7 +214,7 @@ int main(int argc, char *argv[])
 		if (sock < 0)
 			return 1;
 
-		ret = request_data(sock, request, gzip, &output_formatter);
+		ret = request_data(sock, request, true, &output_formatter);
 		close(sock);
 
 		return ret;
