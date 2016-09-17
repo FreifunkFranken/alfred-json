@@ -35,9 +35,8 @@
 static void alfred_usage(void)
 {
 	printf("alfred-json %s\n\n", SOURCE_VERSION);
-	printf("Usage: alfred-json -r <data type> [-f <format>] [-z] [-s <socket>]\n\n");
+	printf("Usage: alfred-json -r <data type> [-z] [-s <socket>]\n\n");
 	printf("  -r, --request [data type]   retrieve data from the network\n");
-	printf("  -f, --format <format>       output format (\"json\" (default), \"string\" or \"binary\")\n");
 	printf("  -s, --socket <path>         path to alfred unix socket\n");
 	printf("  -z, --gzip                  enable transparent decompression (GZip)\n");
 	printf("  -h, --help                  this help\n");
@@ -182,14 +181,13 @@ int main(int argc, char *argv[])
 	int opt, opt_ind, i;
 	struct option long_options[] = {
 		{"request",	required_argument,	NULL,	'r'},
-		{"format",	required_argument,	NULL,	'f'},
 		{"socket",	required_argument,	NULL,	's'},
 		{"gzip",	no_argument,	NULL,	'z'},
 		{"help",	no_argument,	NULL,	'h'},
 		{NULL,	0,	NULL,	0},
 	};
 
-	while ((opt = getopt_long(argc, argv, "r:f:s:hz", long_options, &opt_ind)) != -1) {
+	while ((opt = getopt_long(argc, argv, "r:s:hz", long_options, &opt_ind)) != -1) {
 		switch (opt) {
 		case 'r':
 			i = atoi(optarg);
@@ -199,18 +197,6 @@ int main(int argc, char *argv[])
 			}
 			request = i;
 
-			break;
-		case 'f':
-			if (strncmp(optarg, "json", 4) == 0)
-				output_formatter = output_formatter_json;
-			else if (strncmp(optarg, "string", 6) == 0)
-				output_formatter = output_formatter_string;
-			else if (strncmp(optarg, "binary", 6) == 0)
-				output_formatter = output_formatter_binary;
-			else {
-				fprintf(stderr, "Invalid output format!\n");
-				exit(1);
-			}
 			break;
 		case 's':
 			socket_path = optarg;
