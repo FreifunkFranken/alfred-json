@@ -177,7 +177,7 @@ int main(int argc, char *argv[])
 {
 	int request = -1;
 	const char *socket_path = "/var/run/alfred.sock";
-	struct output_formatter output_formatter = output_formatter_json;
+	struct output_formatter output_formatter = output_formatter_string;
 
 	int opt, opt_ind, i;
 	struct option long_options[] = {

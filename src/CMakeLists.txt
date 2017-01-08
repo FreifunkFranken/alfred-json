@@ -7,7 +7,8 @@ include_directories(
 
 add_executable(alfred-json
     main.c
-    output_json.c
+    #output_json.c
+    output_string.c
     zcat.c
 )
 
